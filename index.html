@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRON AI | SUPREME ARCHITECTURE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #c5a059; 
+            --ink: #0d0d0d; 
+            --paper: #fcfaf7;
+            --deep-royal: #1a1a1a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        
+        body {
+            /* Pure Procedural Old Money Background (No Real Photos) */
+            background-color: var(--ink);
+            background-image: 
+                radial-gradient(circle at 50% 50%, #222 0%, #0d0d0d 100%),
+                linear-gradient(rgba(197, 160, 89, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 160, 89, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            color: var(--paper);
+            font-family: 'Inter', sans-serif;
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            overflow: hidden; perspective: 1200px;
+        }
+
+        /* Subtle Pattern Overlay for Luxury Texture */
+        body::before {
+            content: ""; position: fixed; inset: 0; opacity: 0.15;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l15 30-15 30-15-30z' fill='%23c5a059' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+            z-index: -1;
+        }
+
+        /* New Top Navigation */
+        .top-nav {
+            position: absolute; top: 30px; display: flex; gap: 20px; z-index: 100;
+        }
+        .nav-link {
+            text-decoration: none; color: var(--gold); font-family: 'Cinzel';
+            font-size: 11px; letter-spacing: 3px; border: 1px solid var(--gold);
+            padding: 10px 20px; transition: 0.4s; background: rgba(0,0,0,0.3);
+        }
+        .nav-link:hover { background: var(--gold); color: #000; }
+
+        .main-container {
+            width: 95%; max-width: 550px; 
+            background: rgba(255, 255, 255, 0.98); 
+            padding: 45px; border: 1px solid var(--gold); position: relative;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8), inset 0 0 50px rgba(197,160,89,0.05);
+            transform-style: preserve-3d; transition: transform 0.1s;
+            z-index: 10; color: var(--ink);
+        }
+
+        /* Protocol Modal & Legal Modal */
+        #protocolModal, #legalModal {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(5px);
+        }
+        .modal-body {
+            background: var(--paper); padding: 40px; width: 90%; max-width: 450px;
+            border: 1px solid var(--gold); position: relative; animation: modalFade 0.5s ease;
+            max-height: 80vh; overflow-y: auto;
+        }
+        @keyframes modalFade { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-body h2 { font-family: 'Cinzel'; color: #000; margin-bottom: 20px; text-align: center; }
+        .step { margin-bottom: 15px; font-size: 13px; line-height: 1.6; border-left: 2px solid var(--gold); padding-left: 15px; color: #444; }
+        .step b { color: #000; font-family: 'Inter'; }
+
+        .live-stat {
+            text-align: center; margin-bottom: 25px; 
+            border: 1px solid rgba(197, 160, 89, 0.2); padding: 12px;
+            background: #fff; position: relative;
+        }
+        
+        .pulse-dot {
+            height: 8px; width: 8px; background-color: #c5a059; border-radius: 50%;
+            display: inline-block; margin-right: 8px; box-shadow: 0 0 10px var(--gold);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.5; } }
+
+        h1 { font-family: 'Cinzel'; font-size: 34px; letter-spacing: 14px; text-align: center; margin-bottom: 5px; font-weight: 900; color: #000; }
+        .tagline { font-family: 'Playfair Display'; font-style: italic; text-align: center; color: var(--gold); font-size: 14px; margin-bottom: 20px; letter-spacing: 4px; }
+
+        label { font-size: 10px; letter-spacing: 4px; color: #777; text-transform: uppercase; display: block; margin-bottom: 8px; font-weight: 700; }
+        
+        input, select {
+            width: 100%; padding: 12px 0; background: none; border: none; border-bottom: 1px solid #ddd;
+            font-family: 'Playfair Display'; font-size: 18px; outline: none; transition: 0.4s; color: var(--ink);
+        }
+        input:focus { border-bottom-color: var(--gold); }
+
+        .btn-gold {
+            width: 100%; padding: 22px; background: var(--ink); color: white; border: none;
+            margin-top: 25px; font-family: 'Cinzel'; letter-spacing: 7px; font-weight: 700;
+            cursor: pointer; transition: 0.5s; position: relative; overflow: hidden;
+        }
+        .btn-gold:hover { background: #000; letter-spacing: 9px; box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+
+        #blueprint-display {
+            display: none; margin-top: 30px; border: 1px solid #eee; padding: 25px;
+            max-height: 280px; overflow-y: auto; background: #fafafa;
+            border-left: 5px solid var(--gold); scrollbar-width: thin;
+        }
+
+        .typewriter-text { font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.7; color: #333; }
+        
+        .status-bar { position: fixed; bottom: 25px; left: 25px; font-family: 'Cinzel'; font-size: 11px; color: var(--gold); letter-spacing: 2px; }
+        
+        #success-screen {
+            display: none; position: fixed; inset: 0; background: var(--ink); z-index: 2000;
+            flex-direction: column; align-items: center; justify-content: center; text-align: center;
+        }
+
+        .footer-links {
+            text-align: center; margin-top: 25px; font-size: 10px; letter-spacing: 2px;
+        }
+        .footer-links a { text-decoration: none; color: #999; margin: 0 10px; transition: 0.3s; cursor: pointer; }
+        .footer-links a:hover { color: var(--gold); }
+
+        .corner { position: absolute; width: 30px; height: 30px; border: 2px solid var(--gold); }
+        .top-left { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+        .top-right { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
+        .bottom-left { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
+        .bottom-right { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="javascript:void(0)" class="nav-link" onclick="toggleProtocol(true)">PROTOCOL</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1464632025993711677&permissions=8&integration_type=0&scope=applications.commands+bot" target="_blank" class="nav-link">ADD BOT</a>
+    </div>
+
+    <div id="protocolModal">
+        <div class="modal-body">
+            <h2>USE PROTOCOL</h2>
+            <div class="step"><b>01. ENABLE DEVELOPER MODE:</b> Go to Discord Settings > Advanced > Toggle "Developer Mode" ON.</div>
+            <div class="step"><b>02. ADD THE BOT:</b> Use the "ADD BOT" button to invite CRON AI to your establishment.</div>
+            <div class="step"><b>03. EXTRACT SERVER ID:</b> Right-click your Server Name (desktop) or tap Server Name > Scroll down (mobile) and click "Copy Server ID".</div>
+            <div class="step"><b>04. ARCHITECT:</b> Fill in your theme and nodes, draft the blueprint, paste the ID, and Manifest.</div>
+            <button class="btn-gold" style="padding:15px; margin-top:10px;" onclick="toggleProtocol(false)">CLOSE</button>
+        </div>
+    </div>
+
+    <div id="legalModal">
+        <div class="modal-body">
+            <h2 id="legalTitle">LEGAL ARCHIVE</h2>
+            <div id="legalContent"></div>
+            <button class="btn-gold" style="padding:15px; margin-top:10px;" onclick="toggleLegal(false)">I UNDERSTAND</button>
+        </div>
+    </div>
+
+    <div class="status-bar" id="statusLog">> SYSTEM: STANDBY</div>
+
+    <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="manifestSound" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
+
+    <div id="success-screen">
+        <h1 style="color: var(--gold); letter-spacing: 15px;">ESTATE MANIFESTED</h1>
+        <p style="font-family: 'Playfair Display'; font-style: italic; color: #666; margin: 20px 0;">The architecture has been integrated into the digital realm.</p>
+        <button class="btn-gold" style="width: auto; padding: 15px 60px;" onclick="location.reload()">NEW ARCHIVE</button>
+    </div>
+
+    <div class="main-container" id="card">
+        <div class="corner top-left"></div><div class="corner top-right"></div>
+        <div class="corner bottom-left"></div><div class="corner bottom-right"></div>
+
+        <div class="live-stat">
+            <div style="font-size: 26px; font-weight: 900; color: var(--gold); font-family: 'Cinzel';" id="liveCounter">1,240</div>
+            <div style="font-size: 10px; letter-spacing: 3px; color: #999;"><span class="pulse-dot"></span>SERVERS DEPLOYED GLOBALLY</div>
+        </div>
+
+        <h1>CRON AI</h1>
+        <p class="tagline">ARCHITECTED BY NAUMAN ALI</p>
+
+        <div style="margin-bottom: 20px;">
+            <label>Establishment Theme</label>
+            <input type="text" id="themeInput" placeholder="Royal Petroleum Club" autocomplete="off">
+        </div>
+
+        <div style="display: flex; gap: 25px;">
+            <div style="flex: 1;">
+                <label>Channels</label>
+                <select id="chCount">
+                    <option value="20">20 CHANNELS</option>
+                    <option value="30">30 CHANNELS</option>
+                    <option value="40">40 CHANNELS</option>
+                </select>
+            </div>
+            <div style="flex: 1;">
+                <label>Roles</label>
+                <select id="roleCount">
+                    <option value="5">5 ROLES</option>
+                    <option value="10">10 ROLES</option>
+                    <option value="15">15 ROLES</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-gold" onclick="generate()" id="genBtn">DRAFT BLUEPRINT</button>
+
+        <div id="blueprint-display">
+            <div id="typewriter-content" class="typewriter-text"></div>
+            <div id="deploy-section" style="display:none; margin-top: 25px; border-top: 1px solid #ddd; padding-top: 20px;">
+                <label>Guild Identification</label>
+                <input type="text" id="guildId" placeholder="000000000000000000">
+                <button class="btn-gold" style="background: var(--gold); color: black;" id="deployBtn" onclick="deploy()">MANIFEST ESTATE</button>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <a onclick="showLegal('privacy')">PRIVACY POLICY</a>
+            <a onclick="showLegal('terms')">TERMS & CONDITIONS</a>
+        </div>
+    </div>
+
+    <script>
+        // Protocol Toggle
+        function toggleProtocol(show) {
+            document.getElementById('protocolModal').style.display = show ? 'flex' : 'none';
+        }
+
+        // Legal Popups
+        function toggleLegal(show) {
+            document.getElementById('legalModal').style.display = show ? 'flex' : 'none';
+        }
+
+        function showLegal(type) {
+            const title = document.getElementById('legalTitle');
+            const content = document.getElementById('legalContent');
+            
+            if(type === 'privacy') {
+                title.innerText = "PRIVACY POLICY";
+                content.innerHTML = `
+                    <div class="step"><b>DATA SAFETY:</b> We do not store your personal Discord messages or user data. We only access server structure to architect the layout.</div>
+                    <div class="step"><b>ENCRYPTION:</b> All Manifestation requests are processed through secure protocols.</div>
+                    <div class="step"><b>LOGS:</b> System logs are wiped every 24 hours to ensure absolute anonymity.</div>
+                `;
+            } else {
+                title.innerText = "TERMS & CONDITIONS";
+                content.innerHTML = `
+                    <div class="step"><b>USAGE:</b> This tool is for professional server architecture only. Abuse of the deployment system is prohibited.</div>
+                    <div class="step"><b>LIABILITY:</b> CRON AI is not responsible for any modifications made to the server after the Manifestation process.</div>
+                    <div class="step"><b>AUTHORITY:</b> By using this tool, you confirm you have administrative rights to the target server.</div>
+                `;
+            }
+            toggleLegal(true);
+        }
+
+        // --- Live Counter ---
+        let count = 1240;
+        setInterval(() => { if(Math.random() > 0.85) { count++; document.getElementById('liveCounter').innerText = count.toLocaleString(); } }, 3500);
+
+        // --- Mouse Parallax ---
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 45;
+            const y = (window.innerHeight / 2 - e.pageY) / 45;
+            document.getElementById('card').style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        });
+
+        function log(msg) { document.getElementById('statusLog').innerText = `> ${msg}`; }
+
+        async function generate() {
+            document.getElementById('clickSound').play();
+            const theme = document.getElementById('themeInput').value;
+            if(!theme) return;
+
+            const btn = document.getElementById('genBtn');
+            btn.innerText = "ARCHITECTING...";
+            btn.disabled = true;
+            log("INITIATING NEURAL DRAFT...");
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ 
+                        category: theme, 
+                        chCount: document.getElementById('chCount').value, 
+                        roleCount: document.getElementById('roleCount').value 
+                    })
+                });
+                
+                window.bp = await response.json();
+                document.getElementById('blueprint-display').style.display = 'block';
+                startTyping(window.bp);
+                btn.innerText = "BLUEPRINT SECURED";
+            } catch(e) {
+                btn.innerText = "RETRY DRAFT"; btn.disabled = false;
+                log("ERROR: CONNECTION TIMEOUT");
+            }
+        }
+
+        function startTyping(data) {
+            log("MAPPING HIERARCHY...");
+            const target = document.getElementById('typewriter-content');
+            target.innerText = "";
+            let roleStr = data.roles.map(r => r.name || r).join(', ');
+            let channelStr = data.categories.map(c => `\n📁 ${c.name.toUpperCase()}\n   ${c.channels.map(ch => '#' + (ch.name || ch)).join('\n   ')}`).join('\n');
+            let fullText = `> ARCHITECTURE SECURED.\n> THEME: ${document.getElementById('themeInput').value.toUpperCase()}\n\n[RANKS]\n${roleStr}\n\n[ARCHITECTURE]${channelStr}\n\n> SYSTEM READY.`;
+            
+            let i = 0;
+            const timer = setInterval(() => {
+                target.innerText += fullText.charAt(i); i++;
+                if(i >= fullText.length) { 
+                    clearInterval(timer); 
+                    document.getElementById('deploy-section').style.display = 'block'; 
+                    log("AWAITING FINAL COMMAND..."); 
+                }
+            }, 5);
+        }
+
+        async function deploy() {
+            const gid = document.getElementById('guildId').value;
+            if(!gid) return;
+            log("EXECUTING MANIFESTATION...");
+            const btn = document.getElementById('deployBtn');
+            btn.innerText = "MANIFESTING..."; btn.disabled = true;
+
+            try {
+                const res = await fetch('/setup-server', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ guildId: gid, templateData: window.bp })
+                });
+
+                if(res.ok) {
+                    document.getElementById('manifestSound').play();
+                    document.getElementById('success-screen').style.display = 'flex';
+                }
+            } catch(e) { log("MANIFESTATION FAILED."); btn.disabled = false; }
+        }
+    </script>
+</body>
+          </html>
+  
