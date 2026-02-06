@@ -43,7 +43,7 @@ client.on('interactionCreate', async (interaction) => {
             .addFields(
                 { 
                     name: 'Step 1: Design Your Vision', 
-                    value: 'Visit [CRON AI Dashboard](https://cron-ai--alinauman7011.replit.app) and define your theme, role counts, and channel density.' 
+                    value: 'Visit [CRON AI Dashboard](https://cron-ai.onrender.com) and define your theme, role counts, and channel density.' 
                 },
                 { 
                     name: 'Step 2: Generate Blueprint', 
@@ -51,7 +51,7 @@ client.on('interactionCreate', async (interaction) => {
                 },
                 { 
                     name: 'Step 3: Permission Setup', 
-                    value: 'Ensure the CRON AI Bot has **Administrator** permissions and its role is at the **Top** of the hierarchy. (GO TO DISCORD SETTINGS AND ENABLE DEVELOPER MODE TO COPY SERVER ID )'
+                    value: 'Ensure the CRON AI Bot has **Following** permissions and its role is at the **Top** of the hierarchy. (GO TO DISCORD SETTINGS AND ENABLE DEVELOPER MODE TO COPY SERVER ID )'
                 },
                 { 
                     name: 'Step 4: Deployment', 
