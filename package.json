@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": "topgg-autoposter": "^2.0.1"
     "@types/node": "^22.13.11",
     "axios": "^1.13.2",
     "cors": "^2.8.6",
