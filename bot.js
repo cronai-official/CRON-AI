@@ -1,7 +1,7 @@
 const { Client, GatewayIntentBits, ChannelType, REST, Routes, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { AutoPoster } = require('topgg-autoposter');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-const ap = AutoPoster('YOUR_TOPGG_TOKEN_HERE', client);
+const ap = AutoPoster('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib3QiOiJ0cnVlIiwiaWQiOiIxNDY0NjMyMDI1OTkzNzExNjc3IiwiaWF0IjoiMTc3MDQ0NjU0OSJ9.TvGwJ4AiticpVAGyI1p0xxcO4fTNbIku11UAAs9Ibqg', client);
 
 ap.on('posted', () => {
   console.log('Stats updated on Top.gg!');
