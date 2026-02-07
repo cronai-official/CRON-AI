@@ -1,5 +1,11 @@
 const { Client, GatewayIntentBits, ChannelType, REST, Routes, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { AutoPoster } = require('topgg-autoposter');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const ap = AutoPoster('YOUR_TOPGG_TOKEN_HERE', client);
+
+ap.on('posted', () => {
+  console.log('Stats updated on Top.gg!');
+});
 
 const commands = [
     new SlashCommandBuilder().setName('info').setDescription('CRON AI System Credentials'),
